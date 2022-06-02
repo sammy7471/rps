@@ -12,6 +12,7 @@ function computerPlay() {
     return computerPLay
 }
 
+
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === "Rock" && computerSelection === "Scissors") {
         userScore++;
@@ -47,7 +48,7 @@ let computerScore = 0;
 
 function game() {
     for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt("Choose");
+        const playerSelection = prompt("Choose").toLowerCase();
         const computerSelection = computerPlay();
         console.log(playRound(playerSelection, computerSelection));
         console.log("your score = " + userScore);
