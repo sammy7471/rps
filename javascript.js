@@ -43,17 +43,15 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+const buttons = document.querySelectorAll(".button");
+buttons.forEach((button) => {
+    button.addEventListener("click", playRound => {
+        const playerSelection = button.id;
+    });
+});
 let userScore = 0;
 let computerScore = 0;
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        const playerSelection = prompt("Choose").toLowerCase();
         const computerSelection = computerPlay();
-        console.log(playRound(playerSelection, computerSelection));
         console.log("your score = " + userScore);
         console.log("computer score = " + computerScore);
-    }
-}
-
-game();
