@@ -1,4 +1,6 @@
 // javascript
+let playerScore = 0;
+let computerScore = 0;
 
 function computerPlay() {
     let computerPLay = Math.random()
@@ -12,25 +14,24 @@ function computerPlay() {
     return computerPLay
 }
 
-
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === "Rock" && computerSelection === "Scissors") {
-        userScore++;
+        ++playerScore;
         return "You Win! Rock Defeats Scissors!"
     } else if (playerSelection === "Rock" && computerSelection === "Paper") {
-        computerScore++;
+        ++computerScore;
         return "You Lose! Paper Defeats Rock"
     } else if (playerSelection === "Scissors" && computerSelection === "Rock") {
-        computerScore++;
+        ++computerScore;
         return "You Lose! Rock Defeats Scissors"
     } else if (playerSelection === "Paper" && computerSelection === "Rock") {
-        userScore++;
+        ++playerScore;
         return "You Win! Paper Defeats Rock"
     } else if (playerSelection === "Scissors" && computerSelection === "Paper") {
-        userScore++;
+        ++playerScore;
         return "You Win! Scissors Defeats Paper"
     } else if (playerSelection === "Paper" && computerSelection === "Scissors") {
-        computerScore++;
+        ++computerScore;
         return "You Lose! Scissors Defeats Paper"
     } else if (playerSelection === "Rock" && computerSelection === "Rock") {
         return "It is a draw tie"
@@ -43,15 +44,12 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-const buttons = document.querySelectorAll(".button");
+function clickedListener(event) {
+    const playerSelection = event.target.id;
+    const computerSelection = computerPlay();
+    playRound(playerSelection, computerSelection);
+}
+const buttons = document.querySelectorAll("#button-container");
 buttons.forEach((button) => {
-    button.addEventListener("click", playRound => {
-        const playerSelection = button.id;
-    });
+    button.addEventListener("click", clickedListener);
 });
-let userScore = 0;
-let computerScore = 0;
-
-        const computerSelection = computerPlay();
-        console.log("your score = " + userScore);
-        console.log("computer score = " + computerScore);
