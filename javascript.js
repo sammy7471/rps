@@ -1,9 +1,7 @@
 // javascript
-let playerScore = 0;
-let computerScore = 0;
 
 function computerPlay() {
-    let computerPLay = Math.random()
+    let computerPLay = Math.random();
     if (computerPLay < 0.3) {
         computerPLay = "Rock";
     } else if (computerPLay > 0.3 && computerPLay < 0.6) {
@@ -15,29 +13,28 @@ function computerPlay() {
 }
 
 function playRound(playerSelection, computerSelection) {
+
     if (playerSelection === "Rock" && computerSelection === "Scissors") {
-        ++playerScore;
+        playWin();
         return "You Win! Rock Defeats Scissors!"
     } else if (playerSelection === "Rock" && computerSelection === "Paper") {
-        ++computerScore;
+        computerWin();
         return "You Lose! Paper Defeats Rock"
     } else if (playerSelection === "Scissors" && computerSelection === "Rock") {
-        ++computerScore;
+        computerWin();
         return "You Lose! Rock Defeats Scissors"
     } else if (playerSelection === "Paper" && computerSelection === "Rock") {
-        ++playerScore;
+        playWin();
         return "You Win! Paper Defeats Rock"
     } else if (playerSelection === "Scissors" && computerSelection === "Paper") {
-        ++playerScore;
+        playWin();
         return "You Win! Scissors Defeats Paper"
     } else if (playerSelection === "Paper" && computerSelection === "Scissors") {
-        ++computerScore;
+        computerWin();
         return "You Lose! Scissors Defeats Paper"
-    } else if (playerSelection === "Rock" && computerSelection === "Rock") {
-        return "It is a draw tie"
-    } else if (playerSelection === "Paper" && computerSelection === "Paper") {
-        return "It is a draw tie"
-    } else if (playerSelection === "Scissors" && computerSelection === "Scissors") {
+    } else if (playerSelection === computerSelection) {
+        computerWin();
+        playWin();
         return "It is a draw tie"
     } else {
         return "Something Went Wrong"
@@ -47,9 +44,40 @@ function playRound(playerSelection, computerSelection) {
 function clickedListener(event) {
     const playerSelection = event.target.id;
     const computerSelection = computerPlay();
-    playRound(playerSelection, computerSelection);
+    document.getElementById("playround-output").innerText = playRound(playerSelection, computerSelection);
+    checkWinner();
+    end();
 }
 const buttons = document.querySelectorAll("#button-container");
 buttons.forEach((button) => {
     button.addEventListener("click", clickedListener);
 });
+
+let playerScore = 0;
+let computerScore = 0;
+
+function playWin() {
+    playerScore++;
+    playScore.innerText = playerScore;
+}
+
+function computerWin() {
+    computerScore++;
+    computeScore.innerText = computerScore;
+}
+
+function checkWinner() {
+    if (playerScore == 5 || computerScore == 5) {
+        buttons.forEach((button) => {
+            button.removeEventListener("click", clickedListener);
+        });
+    }
+}
+
+function end() {
+    if (playerScore == 5) {
+        document.getElementById("end").innerText = "Congratulations!";
+    } else if (computerScore == 5) {
+        document.getElementById("end").innerText = "You Lost!";
+    }
+}
