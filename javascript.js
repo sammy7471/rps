@@ -33,8 +33,6 @@ function playRound(playerSelection, computerSelection) {
         computerWin();
         return "You Lose! Scissors Defeats Paper"
     } else if (playerSelection === computerSelection) {
-        computerWin();
-        playWin();
         return "It is a draw tie"
     } else {
         return "Something Went Wrong"
@@ -78,7 +76,7 @@ function end() {
     if (playerScore == 5 && computerScore < 5) {
         document.getElementById("end").innerText = "Congratulations!, You win with " + playerScore + " points";
     } else if (computerScore == 5 && playerScore < 5) {
-        document.getElementById("end").window.alert = "Oouch, You Lost!. Computer wins with " + computerScore + " points";
+        document.getElementById("end").innerText = "Oouch, You Lost!. Computer wins with " + computerScore + " points";
     } else if (playerScore == 5 && computerScore == 5) {
         document.getElementById("end").innerText = "Wow, It was a tie";
     }
